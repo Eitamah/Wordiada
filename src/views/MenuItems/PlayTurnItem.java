@@ -1,6 +1,15 @@
 package views.MenuItems;
 
-public class PlayTurnItem implements MenuItem {
+import java.util.Scanner;
+
+import engine.GameManager;
+
+public class PlayTurnItem extends MenuItem {
+
+	public PlayTurnItem(Scanner scanner) {
+		super(scanner);
+		// TODO Auto-generated constructor stub
+	}
 
 	private final String MENU_STRING = "Play turn";
 
@@ -10,8 +19,7 @@ public class PlayTurnItem implements MenuItem {
 	}
 
 	@Override
-	public void Execute() {
-		System.out.println("Execute Playturn item");
+	public void Execute(GameManager gameManager) {
 	}
 
 }

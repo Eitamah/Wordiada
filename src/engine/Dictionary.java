@@ -7,10 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
 
 import org.apache.commons.io.input.BOMInputStream;
 
@@ -23,27 +19,34 @@ public class Dictionary {
 		return words.containsKey(word);
 	}
 	
-	public Dictionary(String filePath) throws FileNotFoundException, IOException {
+	public Dictionary(String filePath) throws FileNotFoundException, IllegalArgumentException {
 		words = new HashMap<String, Integer>();
-		loadDictionary(filePath);
+		try {
+			loadDictionary(filePath);
+		} catch (IOException e) {
+			throw new IllegalArgumentException("problem with dictionary file");
+		}
 		
 		if (totalWords < 1) {
-			throw new IOException("Dictionary file doesnt contain any words");
+			throw new IllegalArgumentException("Dictionary file doesnt contain any words");
 		}
 	}
 	
-	private void loadDictionary(String filePath) throws FileNotFoundException, IOException {
+	private void loadDictionary(String filePath) throws IllegalArgumentException, IOException {
 		BufferedReader br = null;
 		FileReader fr = null;
-		
-		File file = new File(filePath);
-		FileInputStream fs = new FileInputStream(file);
-		
-		// byte order mark (BOM) is a Unicode character used to signal the endianness 
-		// (byte order) of a text file or stream. we don't want to add this as a word.
-		BOMInputStream bmr = new BOMInputStream(fs);
+		File file;
+		FileInputStream fs = null;;
+		BOMInputStream bmr = null;
 		
 		try {
+			file = new File(filePath);
+			fs = new FileInputStream(file);
+			
+			// byte order mark (BOM) is a Unicode character used to signal the endianness 
+			// (byte order) of a text file or stream. we don't want to add this as a word.
+			bmr = new BOMInputStream(fs);
+		
 			fr = new FileReader(filePath);
 			br = new BufferedReader(fr);
 			
@@ -69,6 +72,8 @@ public class Dictionary {
 				
 				currentLine = br.readLine();
 			}
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException("Dictionary file not found");
 		}
 		finally {
 			if (br != null) {

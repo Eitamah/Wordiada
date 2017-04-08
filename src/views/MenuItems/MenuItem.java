@@ -1,6 +1,16 @@
 package views.MenuItems;
 
-public interface MenuItem {
-	public String getString();
-	public void Execute();
+import java.util.Scanner;
+
+import engine.GameManager;
+
+public abstract class MenuItem {
+	Scanner scanner;
+	
+	public MenuItem(Scanner scanner) {
+		this.scanner = scanner;
+	}
+	
+	public abstract String getString();
+	public abstract void Execute(GameManager gameManager);
 }

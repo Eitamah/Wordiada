@@ -1,7 +1,16 @@
 package views.MenuItems;
 
-public class ShowGameStatusItem implements MenuItem {
+import java.util.Scanner;
+
+import engine.GameManager;
+
+public class ShowGameStatusItem extends MenuItem {
 	
+	public ShowGameStatusItem(Scanner scanner) {
+		super(scanner);
+		// TODO Auto-generated constructor stub
+	}
+
 	private final String MENU_STRING = "Show game status";
 
 	@Override
@@ -11,7 +20,7 @@ public class ShowGameStatusItem implements MenuItem {
 	}
 
 	@Override
-	public void Execute() {
+	public void Execute(GameManager gameManager) {
 		System.out.println("Execute show game status item");
 	}
 

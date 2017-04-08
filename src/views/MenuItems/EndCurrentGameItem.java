@@ -1,6 +1,14 @@
 package views.MenuItems;
 
-public class EndCurrentGameItem implements MenuItem {
+import java.util.Scanner;
+
+import engine.GameManager;
+
+public class EndCurrentGameItem extends MenuItem {
+
+	public EndCurrentGameItem(Scanner scanner) {
+		super(scanner);
+	}
 
 	private final String MENU_STRING = "End current game";
 
@@ -10,7 +18,7 @@ public class EndCurrentGameItem implements MenuItem {
 	}
 
 	@Override
-	public void Execute() {
+	public void Execute(GameManager gameManager) {
 		System.out.println("Execute End Current Game Item");
 	}
 

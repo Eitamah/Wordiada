@@ -1,8 +1,15 @@
 package views.MenuItems;
 
-import java.io.Console;
+import java.util.Scanner;
 
-public class EndGameItem implements MenuItem {
+import engine.GameManager;
+
+public class EndGameItem extends MenuItem {
+
+	public EndGameItem(Scanner scanner) {
+		super(scanner);
+		// TODO Auto-generated constructor stub
+	}
 
 	private final String MENU_STRING = "End game";
 	@Override
@@ -11,7 +18,7 @@ public class EndGameItem implements MenuItem {
 	}
 
 	@Override
-	public void Execute() {
+	public void Execute(GameManager gameManager) {
 		System.out.println("Execute EndGameItem");
 	}
 

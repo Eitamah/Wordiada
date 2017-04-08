@@ -1,6 +1,15 @@
 package views.MenuItems;
 
-public class GetStatsItem implements MenuItem {
+import java.util.Scanner;
+
+import engine.GameManager;
+
+public class GetStatsItem extends MenuItem {
+
+	public GetStatsItem(Scanner scanner) {
+		super(scanner);
+		// TODO Auto-generated constructor stub
+	}
 
 	private final String MENU_STRING = "Get game statistics";
 
@@ -10,7 +19,7 @@ public class GetStatsItem implements MenuItem {
 	}
 
 	@Override
-	public void Execute() {
+	public void Execute(GameManager gameManager) {
 		System.out.println("Execute GetStatsItem");
 	}
 
