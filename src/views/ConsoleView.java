@@ -1,10 +1,14 @@
 package views;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import engine.Dictionary;
+import views.MenuItems.EndCurrentGameItem;
 import views.MenuItems.EndGameItem;
 import views.MenuItems.GetStatsItem;
 import views.MenuItems.LoadGameItem;
@@ -24,15 +28,31 @@ public class ConsoleView {
 		menuItems.add(new ShowGameStatusItem());
 		menuItems.add(new PlayTurnItem());
 		menuItems.add(new GetStatsItem());
+		menuItems.add(new EndCurrentGameItem());
 		menuItems.add(new EndGameItem());
 	}
 	
 	public void Run() {
+		Test();
+
 		while (true) {
 			int choice = getUserChoice();
 			menuItems.get(choice).Execute();
 		}
 	}
+	private void Test() {
+		String file = "C:\\Users\\Eitam\\Downloads\\war and piece32.txt";
+		try {
+			Dictionary dict = new Dictionary(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Dictionary file doesn't exist");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}		
+	}
+
 	private int getUserChoice() {
 		printMenu();
 		int num = 0;
