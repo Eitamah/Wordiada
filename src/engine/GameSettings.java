@@ -3,6 +3,7 @@ package engine;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.XMLConstants;
@@ -26,7 +27,8 @@ public class GameSettings implements ValidationEventHandler {
 	}
 	
 	public enum eGameType {
-		Basic
+		Basic,
+		GoldFish
 	}
 	
 	private String dictFilePath;
@@ -40,6 +42,8 @@ public class GameSettings implements ValidationEventHandler {
 	private eWinnerBy winnerBy;
 	private List<Letter> letters;
 	private int numOfPlayers = 2;
+	private int numOfDiceFacets;
+	private GameDescriptor gd;
 	
 	public GameSettings(String filePath) throws FileNotFoundException, IllegalArgumentException, JAXBException {
 		valid = false;
@@ -58,7 +62,6 @@ public class GameSettings implements ValidationEventHandler {
 		}
 
 		jaxbUnmarshaller.setEventHandler(this);
-		GameDescriptor gd;
 		
 		try {
 			File XMLfile = new File(filePath);
@@ -98,6 +101,12 @@ public class GameSettings implements ValidationEventHandler {
 				winnerBy = eWinnerBy.WordCount;
 			}
 			
+			if (gd.getStructure().getCubeFacets() >= Dice.MIN_SIDES) {
+				numOfDiceFacets = gd.getStructure().getCubeFacets();
+			} else {
+				throw new IllegalArgumentException("Dice facets must be at least " + Dice.MIN_SIDES);
+			}
+			
 			loadLetters(gd);
 			valid = true;
 		}
@@ -106,7 +115,6 @@ public class GameSettings implements ValidationEventHandler {
 	private void loadLetters(GameDescriptor gd) throws IllegalArgumentException {
 		letters = new ArrayList<Letter>();
 		List<Letter> list = gd.getStructure().getLetters().getLetter();
-		int totalNum = 0;
 		double totalFreq = 0;
 		
 		for (Letter let : list) {
@@ -114,28 +122,21 @@ public class GameSettings implements ValidationEventHandler {
 		}
 		
 		for (Letter let : list) {
-			let.setFrequency(Math.ceil((let.getFrequency() * 100) / totalFreq));
+			let.setFrequency(Math.ceil( (let.getFrequency() * 100) / totalFreq) );
 		}
 		
 		for (Letter let : list) {
 			if (letters.contains(let)) {
 				throw new IllegalArgumentException("the letter " + let.getSign() + " apears more than once");
 			}
-			int numOfLetter = (int)Math.ceil((let.getFrequency() / 100) * gd.getStructure().getLetters().getTargetDeckSize());
-			totalNum += numOfLetter;
 			
+			int numOfLetter = (int)Math.ceil((let.getFrequency() / 100) * gd.getStructure().getLetters().getTargetDeckSize());
+			
+			let.getSign().get(0).toUpperCase();
 			for (int i = 0; i < numOfLetter; ++i) {
 				letters.add(let);
 			}
 		}
-		
-		for (Letter let : letters) {
-			System.out.println(let.getSign());
-		}
-			
-		System.out.println("target = " + gd.getStructure().getLetters().getTargetDeckSize());
-		System.out.println("Total freq = " + totalFreq);
-		System.out.println("Total letters = " + letters.size());
 	}
 
 	public boolean isValid() {
@@ -162,13 +163,26 @@ public class GameSettings implements ValidationEventHandler {
 		return numOfPlayers;
 	}
 	
+	public int getBoardSize() {
+		return boardSize;
+	}
+
+	public List<Letter> getLetters() {
+		return letters;
+	}
 	@Override
 	public boolean handleEvent(ValidationEvent event) {
 		xmlValid = false;
-		System.out.println("MESSAGE:  " + event.getMessage());
-		System.out.println("LOCATOR");
-		System.out.println("    LINE NUMBER:  " + event.getLocator().getLineNumber());
-		System.out.println("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
-		return true;
+		// TODO : Maybe get rid of getMessage()
+		throw new IllegalArgumentException("Xml invalid " + event.getMessage() + " line " 
+				+ event.getLocator().getLineNumber() + " column" + event.getLocator().getColumnNumber());
+	}
+	
+	public int getDiceFacets() {
+		return numOfDiceFacets;
+	}
+	
+	public GameDescriptor getDescriptor() {
+		return gd;
 	}
 }

@@ -46,7 +46,12 @@ import javax.xml.bind.annotation.XmlType;
 })
 @XmlRootElement(name = "Player")
 public class Player {
-
+	public enum ePlayerType {
+		COMPUTER,
+		HUMAN,
+		INVALID
+	}
+	
     @XmlList
     @XmlElement(name = "Name", required = true)
     protected List<String> name;
@@ -54,7 +59,17 @@ public class Player {
     protected String type;
     @XmlAttribute(name = "id", required = true)
     protected short id;
+    
+    private List<String> wordsPlayed = new ArrayList<String>();
 
+    public List<String> getWordsPlayed() {
+    	return wordsPlayed;
+    }
+    
+    public void addWordPlayed(String word) {
+    	wordsPlayed.add(word);
+    }
+    
     /**
      * Gets the value of the name property.
      * 
@@ -92,8 +107,17 @@ public class Player {
      *     {@link String }
      *     
      */
-    public String getType() {
-        return type;
+    public ePlayerType getType() {
+    	ePlayerType ret;
+    	if (type.equals("Human")) {
+    		ret = ePlayerType.HUMAN;
+    	} else if (type.equals("Computer")) {
+    		ret = ePlayerType.COMPUTER;
+    	}
+    	else {
+    		ret = ePlayerType.INVALID;
+    	}
+        return ret;
     }
 
     /**
@@ -108,7 +132,29 @@ public class Player {
         this.type = value;
     }
 
-    /**
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	/**
      * Gets the value of the id property.
      * 
      */
@@ -123,5 +169,10 @@ public class Player {
     public void setId(short value) {
         this.id = value;
     }
+
+	public int getScore() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

@@ -1,5 +1,7 @@
 package engine;
 
+import gameSettings.Letter;
+
 public class Tile {
 	public enum eTileState	{
 		FACE_UP,
@@ -8,10 +10,10 @@ public class Tile {
 	
 	private eTileState state;
 	private int score;
-	private char sign;
+	private Letter letter;
 	
 	public int getScore() {
-		return score;
+		return letter.getScore();
 	}
 	
 	public eTileState getState() { 
@@ -19,20 +21,19 @@ public class Tile {
 	}
 	
 	public char getSign() {
-		return sign;
+		return letter.getSign().get(0).charAt(0);
 	}
 	
-	public void setSign(char newSign, int newScore) {
-		sign = newSign;
-		score = newScore;
+	public void setLetter(Letter newLetter) {
+		letter = newLetter;
 	}
 	
 	public void setState(eTileState newState) {
 		state = newState;
 	}
 	
-	public Tile(char sign, int points)	{
+	public Tile(Letter newLetter)	{
 		state = eTileState.FACE_DOWN;
-		score = points;
+		letter = newLetter;
 	}
 }

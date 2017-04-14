@@ -1,18 +1,18 @@
-package views;
+package views.console;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import engine.GameManager;
-import views.MenuItems.EndCurrentGameItem;
-import views.MenuItems.EndGameItem;
-import views.MenuItems.GetStatsItem;
-import views.MenuItems.LoadGameItem;
-import views.MenuItems.MenuItem;
-import views.MenuItems.PlayTurnItem;
-import views.MenuItems.ShowGameStatusItem;
-import views.MenuItems.StartGameItem;
+import views.console.MenuItems.EndCurrentGameItem;
+import views.console.MenuItems.EndGameItem;
+import views.console.MenuItems.GetStatsItem;
+import views.console.MenuItems.LoadGameItem;
+import views.console.MenuItems.MenuItem;
+import views.console.MenuItems.PlayTurnItem;
+import views.console.MenuItems.ShowGameStatusItem;
+import views.console.MenuItems.StartGameItem;
 
 public class ConsoleView {
 	private List<MenuItem> menuItems;

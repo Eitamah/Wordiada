@@ -1,4 +1,4 @@
-import views.ConsoleView;
+import views.console.ConsoleView;
 
 public class Main {
 

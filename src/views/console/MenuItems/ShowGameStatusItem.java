@@ -1,8 +1,11 @@
-package views.MenuItems;
+package views.console.MenuItems;
 
 import java.util.Scanner;
 
+import engine.Board;
 import engine.GameManager;
+import engine.Tile.eTileState;
+import engine.Game.eGameState;
 
 public class ShowGameStatusItem extends MenuItem {
 	
@@ -21,7 +24,12 @@ public class ShowGameStatusItem extends MenuItem {
 
 	@Override
 	public void Execute(GameManager gameManager) {
-		System.out.println("Execute show game status item");
+		if ((gameManager.getCurrentGame() != null) && (gameManager.getCurrentGame().getStatus() != eGameState.UNINITIALIZED)) {
+			Helpers.printGameStatus(gameManager);
+		} else {
+			System.out.println("Game must be loaded first");
+		}
 	}
 
+	
 }

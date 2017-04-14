@@ -13,7 +13,12 @@ import org.apache.commons.io.input.BOMInputStream;
 public class Dictionary {
 	private int totalWords;
 	private static String INVALID_CHARS = "[!?,.:;\\-_=+\\*\"'\\(\\){}\\[\\]%$]";
-	HashMap<String, Integer> words;
+	
+	// Hashmap words for counting words - for later use (score based on frequency) 
+	// Trie is for smart computer
+	private HashMap<String, Integer> words;
+	private Trie trie;
+	
 	
 	public boolean isValidWord(String word) {
 		return words.containsKey(word);
@@ -21,6 +26,7 @@ public class Dictionary {
 	
 	public Dictionary(String filePath) throws FileNotFoundException, IllegalArgumentException {
 		words = new HashMap<String, Integer>();
+		trie = new Trie();
 		try {
 			loadDictionary(filePath);
 		} catch (IOException e) {
@@ -61,6 +67,7 @@ public class Dictionary {
 				for (String word : lineWords) {
 					if (word.length() > 1) {
 						totalWords++;
+						trie.add(word);
 						if (words.containsKey(word)) {
 							words.put(word, words.get(word).intValue() + 1);
 						}
@@ -92,5 +99,17 @@ public class Dictionary {
 				fs.close();
 			}
 		}
+	}
+
+	public String GetLongestWord(char[] cs) {
+		return trie.search(cs);
+	}
+	
+	public int getWordCount(String word) {
+		return words.get(word);
+	}
+	
+	public int getTotalWords() {
+		return totalWords;
 	}
 }

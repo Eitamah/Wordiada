@@ -19,10 +19,11 @@ public class GameManager {
 	private Game game;
 	
 	public GameManager() {
-		game = new Game();
 	}
 	
-	public void loadGame(String xmlPath) throws FileNotFoundException, JAXBException, IllegalArgumentException {
+	public void loadGame(String xmlPath) throws FileNotFoundException, JAXBException, 
+											IllegalArgumentException, IllegalStateException {
+		game = new Game();
 		game.LoadSettings(xmlPath);		
 	}
 	
@@ -33,6 +34,4 @@ public class GameManager {
 	public Game getCurrentGame() {
 		return game;
 	}
-	
-	
 }

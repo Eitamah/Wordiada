@@ -3,7 +3,8 @@ package engine;
 import java.util.Random;
 
 public class Dice {
-	private final int MIN_VALUE = 2;
+	private static final int MIN_VALUE = 2;
+	public static final int MIN_SIDES = 2;
 	private int sides;
 	private Random random;
 	
@@ -17,6 +18,6 @@ public class Dice {
 	}
 	
 	public int rollDice() {
-		return random.nextInt(sides + MIN_VALUE);
+		return random.nextInt(sides - MIN_VALUE + 1) + MIN_VALUE;
 	}
 }

@@ -1,15 +1,17 @@
 package engine;
 
 import java.util.List;
+import java.util.Random;
 
 import engine.Tile.eTileState;
+import gameSettings.Letter;
 
 public class Board {
 	public static final int MAX_SIZE = 50;
 	public static final int MIN_SIZE = 5;
 	private Tile[][] board;
 	private int size;
-	private List<Character> nextTiles;
+	private List<Letter> nextTiles;
 	
 	public int getSize() {
 		return size;
@@ -19,11 +21,31 @@ public class Board {
 		return board;
 	}
 	
-	public Board(int n, List<Character> nextChars) {
+	public Board(int boardSize, List<Letter> nextChars) {
 		nextTiles = nextChars;
-		board = new Tile[n][n];
+		size = boardSize;
+		board = new Tile[size][size];
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				board[i][j] = new Tile(getNextLetter());
+			}
+		}
 	}
 	
+	/*
+	 * List of letters is sorted, so we get a random index and that way get a random letter
+	 */
+	private Letter getNextLetter() {
+		Random random = new Random();
+		int index = random.nextInt(nextTiles.size());
+		
+		Letter ret = nextTiles.get(index);
+		nextTiles.remove(index);
+		
+		return ret;
+	}
+
 	public void flipTile(int n, int m, eTileState newState) throws IndexOutOfBoundsException {
 		if ((n >= size) || (m >= size))
 		{
@@ -31,5 +53,30 @@ public class Board {
 		}
 		
 		board[n][m].setState(newState);
+	}
+	
+	public int getTilesLeft() {
+		return nextTiles.size();
+	}
+	
+	public int getNumOfFaceDownTiles() {
+		int counter = 0;
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				counter += (board[i][j].getState() == eTileState.FACE_DOWN) ? 1 : 0;
+			}
+		}
+		
+		return counter;
+	}
+
+	public void faceDownAllTiles() {
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				board[i][j].setState(eTileState.FACE_DOWN);
+			}
+		}
+		
 	}
 }

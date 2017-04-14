@@ -1,4 +1,4 @@
-package views.MenuItems;
+package views.console.MenuItems;
 
 import java.util.Scanner;
 
