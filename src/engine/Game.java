@@ -1,6 +1,7 @@
 package engine;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,8 +14,13 @@ import gameSettings.Player;
 import gameSettings.Player.ePlayerType;
 import gameSettings.Players;
 
-public class Game {
+public class Game implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum eGameState {
 		UNINITIALIZED,
 		LOADED,

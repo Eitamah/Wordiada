@@ -1,12 +1,13 @@
 package engine;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.List;
 
 
 import gameSettings.Player;
 
-public class Turn {
+public class Turn implements Serializable{
 	private Player player;
 	private boolean isValid;
 	private String word = "";

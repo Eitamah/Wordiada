@@ -8,6 +8,7 @@
 
 package gameSettings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -45,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
 
 })
 @XmlRootElement(name = "Player")
-public class Player {
+public class Player implements Serializable{
 	public enum ePlayerType {
 		COMPUTER,
 		HUMAN,

@@ -2,6 +2,7 @@ package engine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -15,7 +16,11 @@ import org.xml.sax.SAXException;
 
 import gameSettings.GameDescriptor;
 
-public class GameManager {
+public class GameManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Game game;
 	
 	public GameManager() {

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import engine.GameManager;
 import engine.Tile;
+import views.console.ConsoleView;
 import engine.Game.eGameState;
 
 public class AvailableWordsItem extends MenuItem{

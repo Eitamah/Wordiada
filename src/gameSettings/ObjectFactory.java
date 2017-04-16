@@ -8,6 +8,7 @@
 
 package gameSettings;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -30,7 +31,7 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlRegistry
-public class ObjectFactory {
+public class ObjectFactory implements Serializable{
 
     private final static QName _Type_QNAME = new QName("", "Type");
     private final static QName _Score_QNAME = new QName("", "Score");

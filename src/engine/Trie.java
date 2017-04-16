@@ -1,9 +1,10 @@
 package engine;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-public class Trie {
+public class Trie implements Serializable{
 
     private TrieNode root;
     private int size;

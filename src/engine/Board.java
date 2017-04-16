@@ -1,5 +1,6 @@
 package engine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,7 +8,11 @@ import java.util.Random;
 import engine.Tile.eTileState;
 import gameSettings.Letter;
 
-public class Board {
+public class Board implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int MAX_SIZE = 50;
 	public static final int MIN_SIZE = 5;
 	private Tile[][] board;

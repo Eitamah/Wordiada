@@ -1,8 +1,9 @@
 package engine;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class TrieNode {
+public class TrieNode implements Serializable{
     private HashMap<Character, TrieNode> children;
     private String text;
     private boolean isWord;

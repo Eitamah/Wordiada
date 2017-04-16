@@ -8,6 +8,7 @@
 
 package gameSettings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 
 })
 @XmlRootElement(name = "Letter")
-public class Letter {
+public class Letter implements Serializable{
 
     @Override
 	public int hashCode() {

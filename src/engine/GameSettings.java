@@ -2,6 +2,7 @@ package engine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,7 +22,7 @@ import org.xml.sax.SAXException;
 import gameSettings.GameDescriptor;
 import gameSettings.Letter;
 
-public class GameSettings implements ValidationEventHandler {
+public class GameSettings implements ValidationEventHandler, Serializable {
 	public enum eWinnerBy {
 		WordCount
 	}
@@ -34,7 +35,6 @@ public class GameSettings implements ValidationEventHandler {
 	private String dictFilePath;
 	private int deckSize;
 	private Dictionary dictionary;
-	private Scorer scorer;
 	private int boardSize;
 	private eGameType gameType;
 	private boolean valid;
@@ -155,10 +155,6 @@ public class GameSettings implements ValidationEventHandler {
 		return dictionary;
 	}
 	
-	public Scorer getScorer() {
-		return scorer;
-	}
-
 	public int getNumOfPlayers() {
 		return numOfPlayers;
 	}

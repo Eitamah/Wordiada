@@ -6,11 +6,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import org.apache.commons.io.input.BOMInputStream;
 
-public class Dictionary {
+public class Dictionary implements Serializable{
 	private int totalWords;
 	private static String INVALID_CHARS = "[!?,.:;\\-_=+\\*\"'\\(\\){}\\[\\]%$]";
 	

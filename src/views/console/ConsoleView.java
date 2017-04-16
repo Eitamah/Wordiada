@@ -20,7 +20,7 @@ import views.console.MenuItems.StartGameItem;
 public class ConsoleView {
 	private List<MenuItem> menuItems;
     private static Scanner scanner = new Scanner(System.in);
-    GameManager gameManager = new GameManager();
+    private GameManager gameManager = new GameManager();
 	
 	public ConsoleView() {
 		menuItems = new ArrayList<MenuItem>();
@@ -32,7 +32,7 @@ public class ConsoleView {
 		menuItems.add(new EndCurrentGameItem(scanner));
 		menuItems.add(new EndGameItem(scanner));
 		menuItems.add(new SaveGameItem(scanner));
-		menuItems.add(new LoadFileItem(scanner));
+		menuItems.add(new LoadFileItem(this, scanner));
 		menuItems.add(new AvailableWordsItem(scanner));
 	}
 	
@@ -45,6 +45,10 @@ public class ConsoleView {
 		}
 	}
 
+	public void changeManager(GameManager gm) {
+		gameManager = gm;
+	}
+	
 	private int getUserChoice() {
 		printMenu();
 		int num = 0;

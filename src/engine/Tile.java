@@ -1,11 +1,12 @@
 package engine;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import gameSettings.Letter;
 
-public class Tile {
-	public enum eTileState	{
+public class Tile implements Serializable{
+	public enum eTileState 	{
 		FACE_UP,
 		FACE_DOWN
 	}
@@ -73,7 +74,7 @@ public class Tile {
 	}
 	
 	public Tile(Letter newLetter, int x, int y)	{
-		state = eTileState.FACE_UP;
+		state = eTileState.FACE_DOWN;
 		letter = newLetter;
 		coord = new Point(x, y);
 	}

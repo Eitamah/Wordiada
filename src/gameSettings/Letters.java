@@ -8,6 +8,7 @@
 
 package gameSettings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -43,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
     "letter"
 })
 @XmlRootElement(name = "Letters")
-public class Letters {
+public class Letters implements Serializable{
 
     @XmlElement(name = "Letter", required = true)
     protected List<Letter> letter;

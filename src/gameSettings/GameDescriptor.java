@@ -8,6 +8,8 @@
 
 package gameSettings;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -45,7 +47,7 @@ import javax.xml.bind.annotation.XmlType;
     "dynamicPlayers"
 })
 @XmlRootElement(name = "GameDescriptor")
-public class GameDescriptor {
+public class GameDescriptor implements Serializable{
 
     @XmlElement(name = "GameType", required = true)
     protected GameType gameType;

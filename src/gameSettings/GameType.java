@@ -8,6 +8,8 @@
 
 package gameSettings;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -46,7 +48,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "GameType")
-public class GameType {
+public class GameType implements Serializable{
 
     @XmlValue
     protected String value;

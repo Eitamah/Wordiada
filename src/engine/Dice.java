@@ -1,8 +1,9 @@
 package engine;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Dice {
+public class Dice implements Serializable {
 	private static final int MIN_VALUE = 2;
 	public static final int MIN_SIDES = 2;
 	private int sides;

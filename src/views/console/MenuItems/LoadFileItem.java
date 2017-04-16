@@ -1,15 +1,23 @@
 package views.console.MenuItems;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import engine.GameManager;
+import views.console.ConsoleView;
 
 public class LoadFileItem extends MenuItem {
 
 	private final String MENU_STRING = "Load saved game";
+	private ConsoleView console;
 	
-	public LoadFileItem(Scanner scanner) {
+	public LoadFileItem(ConsoleView cm, Scanner scanner) {
 		super(scanner);
+		console = cm;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -21,7 +29,27 @@ public class LoadFileItem extends MenuItem {
 
 	@Override
 	public void Execute(GameManager gameManager) {
-		// TODO Auto-generated method stub
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream("game.dat");
+			ois = new ObjectInputStream(fis);
+			gameManager = (GameManager)ois.readObject();
+			console.changeManager(gameManager);
+		} catch (IOException e) {
+			System.out.println("Unable to read from file");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Unable to read from file");
+		} finally {
+			try {
+				if (ois != null)
+					ois.close();
+				if (fis != null)
+					fis.close();
+			} catch (IOException e) {
+				
+			}
+		}
 
 	}
 

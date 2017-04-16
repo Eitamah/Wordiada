@@ -8,6 +8,7 @@
 
 package gameSettings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -49,7 +50,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "DynamicPlayers")
-public class DynamicPlayers {
+public class DynamicPlayers implements Serializable{
 
     @XmlAttribute(name = "total-players", required = true)
     protected byte totalPlayers;

@@ -8,6 +8,8 @@
 
 package gameSettings;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
@@ -29,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "ST_GameType")
 @XmlEnum
-public enum STGameType {
+public enum STGameType implements Serializable{
 
     @XmlEnumValue("Basic")
     BASIC("Basic");
