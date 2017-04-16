@@ -126,6 +126,32 @@ public class Trie {
     	return bestMatch;
 	}
 	
+	public int countWords(char[] allowedCharacters) {
+		return countWords(root, allowedCharacters);
+	}
+	
+	/*
+	 * Count children that are words (isWord == true) + this one if its a word
+	 */
+	private int countWords(TrieNode n, char[] allowedCharacters) {
+		if (n.getChildren().isEmpty()) {
+			return 0;
+    	}
+		
+		int result = 0;
+		
+    	for (Map.Entry<Character, TrieNode> child : n.getChildren().entrySet()) {
+    		if (contains(allowedCharacters, child.getValue().getValue())) {
+    			result += countWords(child.getValue(), remove(allowedCharacters, child.getValue().getValue()));
+    			if (child.getValue().isWord()) {
+    				result += (child.getValue().isWord() ? 1 : 0);
+    			}
+			}
+		}
+    	
+    	return result;
+	}
+	
 	private char[] remove(char[] allowedCharacters, char value) {
 		char[] newDict = new char[allowedCharacters.length - 1];
 		int index = 0;

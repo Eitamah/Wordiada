@@ -105,6 +105,9 @@ public class Dictionary {
 		return trie.search(cs);
 	}
 	
+	public int getPossibleWordCount(char[] cs) {
+		return trie.countWords(cs);
+	}
 	public int getWordCount(String word) {
 		return words.get(word);
 	}

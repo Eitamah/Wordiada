@@ -5,12 +5,15 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import engine.GameManager;
+import views.console.MenuItems.AvailableWordsItem;
 import views.console.MenuItems.EndCurrentGameItem;
 import views.console.MenuItems.EndGameItem;
 import views.console.MenuItems.GetStatsItem;
+import views.console.MenuItems.LoadFileItem;
 import views.console.MenuItems.LoadGameItem;
 import views.console.MenuItems.MenuItem;
 import views.console.MenuItems.PlayTurnItem;
+import views.console.MenuItems.SaveGameItem;
 import views.console.MenuItems.ShowGameStatusItem;
 import views.console.MenuItems.StartGameItem;
 
@@ -28,6 +31,9 @@ public class ConsoleView {
 		menuItems.add(new GetStatsItem(scanner));
 		menuItems.add(new EndCurrentGameItem(scanner));
 		menuItems.add(new EndGameItem(scanner));
+		menuItems.add(new SaveGameItem(scanner));
+		menuItems.add(new LoadFileItem(scanner));
+		menuItems.add(new AvailableWordsItem(scanner));
 	}
 	
 	public void Run() {

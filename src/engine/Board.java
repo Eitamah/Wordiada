@@ -1,5 +1,6 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class Board {
 		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				board[i][j] = new Tile(getNextLetter());
+				board[i][j] = new Tile(getNextLetter(), i, j);
 			}
 		}
 	}
@@ -59,18 +60,34 @@ public class Board {
 		return nextTiles.size();
 	}
 	
-	public int getNumOfFaceDownTiles() {
-		int counter = 0;
+	public List<Tile> getFaceDownTiles() {
+		List<Tile> ret = new ArrayList<Tile>();
 		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				counter += (board[i][j].getState() == eTileState.FACE_DOWN) ? 1 : 0;
+				if (board[i][j].getState() == eTileState.FACE_DOWN) {
+					ret.add(board[i][j]);	
+				}
 			}
 		}
 		
-		return counter;
+		return ret;
 	}
 
+	public List<Tile> getFaceUpTiles() {
+		List<Tile> ret = new ArrayList<Tile>();
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (board[i][j].getState() == eTileState.FACE_UP) {
+					ret.add(board[i][j]);	
+				}
+			}
+		}
+		
+		return ret;
+	}
+	
 	public void faceDownAllTiles() {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {

@@ -49,7 +49,7 @@ public class PlayTurnItem extends MenuItem {
 		System.out.println("Dice roll - " + diceRoll);
 
 		while ((tilesToUncover > 0) && 
-				(gameManager.getCurrentGame().getBoard().getNumOfFaceDownTiles() > 0)) {
+				(gameManager.getCurrentGame().getBoard().getFaceDownTiles().size() > 0)) {
 			Point coord = getCoordinatesFromUser(gameManager);
 			
 			if (gameManager.getCurrentGame().getBoard().getBoard()[coord.x][coord.y].getState() 
