@@ -47,6 +47,11 @@ import javax.xml.bind.annotation.XmlType;
 })
 @XmlRootElement(name = "Player")
 public class Player implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4051995748190153708L;
+
 	public enum ePlayerType {
 		COMPUTER,
 		HUMAN,
@@ -170,10 +175,4 @@ public class Player implements Serializable{
     public void setId(short value) {
         this.id = value;
     }
-
-	public int getScore() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

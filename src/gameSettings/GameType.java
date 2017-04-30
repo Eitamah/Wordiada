@@ -50,7 +50,11 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlRootElement(name = "GameType")
 public class GameType implements Serializable{
 
-    @XmlValue
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5464623185654157234L;
+	@XmlValue
     protected String value;
     @XmlAttribute(name = "winner-according-to", required = true)
     protected String winnerAccordingTo;

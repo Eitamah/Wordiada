@@ -1,23 +1,23 @@
 package engine;
 
-import java.awt.Point;
 import java.io.Serializable;
-import java.util.List;
-
-
 import gameSettings.Player;
 
 public class Turn implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4608988514220019150L;
 	private Player player;
 	private boolean isValid;
 	private String word = "";
-	private List<Point> points;
+//	private List<Point> points;
 	
-	public Turn(Player p, boolean valid, String text, List<Point> ps) {
+	public Turn(Player p, boolean valid, String text) {
 		player = p;
 		isValid = valid;
 		word = text;
-		points = ps;
+//		points = ps;
 	}
 	
 	public Player getPlayer() {
@@ -32,7 +32,7 @@ public class Turn implements Serializable{
 		return word;
 	}
 	
-	public List<Point> getPoints() {
-		return points;
-	}
+//	public List<Point> getPoints() {
+//		return points;
+//	}
 }

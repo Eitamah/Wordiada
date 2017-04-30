@@ -33,7 +33,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory implements Serializable{
 
-    private final static QName _Type_QNAME = new QName("", "Type");
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -22856475040610485L;
+	private final static QName _Type_QNAME = new QName("", "Type");
     private final static QName _Score_QNAME = new QName("", "Score");
     private final static QName _BoardSize_QNAME = new QName("", "BoardSize");
     private final static QName _Frequency_QNAME = new QName("", "Frequency");

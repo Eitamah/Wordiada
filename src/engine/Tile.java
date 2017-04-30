@@ -6,10 +6,18 @@ import java.io.Serializable;
 import gameSettings.Letter;
 
 public class Tile implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2001599196092326663L;
+
 	public enum eTileState 	{
 		FACE_UP,
-		FACE_DOWN
+		FACE_DOWN,
+		EMPTY
 	}
+
+	private static final char EMPTY_SIGN = '*';
 	
 	private Point coord;
 	private eTileState state;
@@ -19,7 +27,6 @@ public class Tile implements Serializable{
 		int result = 1;
 		result = prime * result + ((coord == null) ? 0 : coord.hashCode());
 		result = prime * result + ((letter == null) ? 0 : letter.hashCode());
-		result = prime * result + score;
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
@@ -43,14 +50,11 @@ public class Tile implements Serializable{
 				return false;
 		} else if (!letter.equals(other.letter))
 			return false;
-		if (score != other.score)
-			return false;
 		if (state != other.state)
 			return false;
 		return true;
 	}
 
-	private int score;
 	private Letter letter;
 	
 	public int getScore() {
@@ -62,7 +66,10 @@ public class Tile implements Serializable{
 	}
 	
 	public char getSign() {
-		return letter.getSign().get(0).charAt(0);
+		if (getState() == eTileState.EMPTY)
+			return EMPTY_SIGN;
+		else
+			return letter.getSign().get(0).charAt(0);
 	}
 	
 	public void setLetter(Letter newLetter) {
@@ -77,5 +84,9 @@ public class Tile implements Serializable{
 		state = eTileState.FACE_DOWN;
 		letter = newLetter;
 		coord = new Point(x, y);
+	}
+	
+	public Point getCoord() {
+		return coord;
 	}
 }

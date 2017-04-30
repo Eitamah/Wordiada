@@ -44,7 +44,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Players")
 public class Players implements Serializable{
 
-    @XmlElement(name = "Player", required = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9067517017396771893L;
+	@XmlElement(name = "Player", required = true)
     protected List<Player> player;
 
     /**

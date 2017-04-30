@@ -9,10 +9,9 @@ public class EndGameItem extends MenuItem {
 
 	public EndGameItem(Scanner scanner) {
 		super(scanner);
-		// TODO Auto-generated constructor stub
 	}
 
-	private final String MENU_STRING = "End game";
+	private final String MENU_STRING = "End game (close app)";
 	@Override
 	public String getString() {
 		return MENU_STRING;

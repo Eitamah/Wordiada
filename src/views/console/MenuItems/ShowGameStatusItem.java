@@ -2,9 +2,7 @@ package views.console.MenuItems;
 
 import java.util.Scanner;
 
-import engine.Board;
 import engine.GameManager;
-import engine.Tile.eTileState;
 import engine.Game.eGameState;
 
 public class ShowGameStatusItem extends MenuItem {

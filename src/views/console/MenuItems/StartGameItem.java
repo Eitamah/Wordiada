@@ -2,7 +2,6 @@ package views.console.MenuItems;
 
 import java.util.Scanner;
 
-import engine.Game.eGameState;
 import engine.GameManager;
 
 public class StartGameItem extends MenuItem {

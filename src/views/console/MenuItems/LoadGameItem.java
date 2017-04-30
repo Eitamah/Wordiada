@@ -28,16 +28,54 @@ public class LoadGameItem extends MenuItem {
 	
 			try {
 				// TODO: Remove this!!!!
-				input = "C:\\temp\\basic_2.xml";
+//				input = "C:\\temp\\basic_1.xml";
 				gameManager.loadGame(input);
+				
+				System.out.println("Would you like a computer player?");
+				System.out.println("0 for none");
+				System.out.println("1 for player 1");
+				System.out.println("2 for player 2");
+				System.out.println("3 for both");
+				System.out.println("Anything invalid will be considered as none");
+				int computerPlayers = 0;
+				try {
+					int val = scanner.nextInt();
+					if (val >= 0 && val <= 3) {
+						computerPlayers = val;
+					}
+					scanner.nextLine();
+				} catch (Exception e){
+					// do nothing
+				}
+				
+				switch (computerPlayers) {
+					case 1:
+					{
+						gameManager.getCurrentGame().getPlayers().get(0).setType("Computer");
+						break;
+					}
+					case 2:
+					{
+						gameManager.getCurrentGame().getPlayers().get(1).setType("Computer");
+						break;
+					}
+					case 3:
+					{
+						gameManager.getCurrentGame().getPlayers().get(0).setType("Computer");
+						gameManager.getCurrentGame().getPlayers().get(1).setType("Computer");
+					}
+	
+					default:
+						break;
+				}
+				
+				Helpers.printGameStatus(gameManager);
 			} catch (IllegalStateException e) {
 				System.out.println("Can't load settings " + e.getMessage());
 			} catch (Exception e) {
 				String message = "Problem with xml file:" + e.getMessage();
 				System.out.println(message);
 			}
-			
-			Helpers.printGameStatus(gameManager);
 		} else {
 			System.out.println("Can't load a new game while current game is running");
 		}

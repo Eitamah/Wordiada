@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.XMLConstants;
@@ -16,13 +15,18 @@ import javax.xml.bind.ValidationEventHandler;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.apache.commons.io.FilenameUtils;
 import org.xml.sax.SAXException;
 
 import gameSettings.GameDescriptor;
 import gameSettings.Letter;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class GameSettings implements ValidationEventHandler, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5822399758574401295L;
+
 	public enum eWinnerBy {
 		WordCount
 	}
@@ -55,16 +59,24 @@ public class GameSettings implements ValidationEventHandler, Serializable {
 		Schema schema;
 		
 		try {
-			schema = sf.newSchema(new File("Wordiada.xsd"));
+//			schema = sf.newSchema(new File("Wordiada.xsd"));
+//			System.out.println("11111111111111111");
+			schema = sf.newSchema(getClass().getClassLoader().getResource("Wordiada.xsd"));
 			jaxbUnmarshaller.setSchema(schema);
 		} catch (SAXException e1) {
 			System.out.println("??????????" + e1.getMessage());
-		}
+		}/* catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println(e.getClass());
+			System.out.println(e.getCause());
+		}*/
 
 		jaxbUnmarshaller.setEventHandler(this);
-		
+		String path = "";	
 		try {
 			File XMLfile = new File(filePath);
+			path = XMLfile.getAbsolutePath();
+			path = path.substring(0, path.lastIndexOf(File.separator));
 			xmlValid = true;
 			gd = (GameDescriptor) jaxbUnmarshaller.unmarshal(XMLfile);
 		} catch (JAXBException e) {
@@ -74,7 +86,7 @@ public class GameSettings implements ValidationEventHandler, Serializable {
 		
 		// If the xml was invalid, the event would have set xmlValid to false
 		if (xmlValid) {
-			dictFilePath =  FilenameUtils.getFullPath(filePath) + "dictionary\\" + gd.getStructure().getDictionaryFileName();
+			dictFilePath =  path + "\\dictionary\\" + gd.getStructure().getDictionaryFileName();
 			dictionary = new Dictionary(dictFilePath);
 		
 			deckSize = gd.getStructure().getLetters().getTargetDeckSize();
@@ -126,13 +138,14 @@ public class GameSettings implements ValidationEventHandler, Serializable {
 		}
 		
 		for (Letter let : list) {
+			let.getSign().get(0).toUpperCase();
+			
 			if (letters.contains(let)) {
 				throw new IllegalArgumentException("the letter " + let.getSign() + " apears more than once");
 			}
 			
 			int numOfLetter = (int)Math.ceil((let.getFrequency() / 100) * gd.getStructure().getLetters().getTargetDeckSize());
 			
-			let.getSign().get(0).toUpperCase();
 			for (int i = 0; i < numOfLetter; ++i) {
 				letters.add(let);
 			}
@@ -180,5 +193,13 @@ public class GameSettings implements ValidationEventHandler, Serializable {
 	
 	public GameDescriptor getDescriptor() {
 		return gd;
+	}
+
+	public int getScore(String word) {
+		if (winnerBy == eWinnerBy.WordCount) {
+			return 1;
+		} else {
+			throw new NotImplementedException();
+		}
 	}
 }

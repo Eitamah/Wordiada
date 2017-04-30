@@ -43,12 +43,13 @@ public class Board implements Serializable {
 	 * List of letters is sorted, so we get a random index and that way get a random letter
 	 */
 	private Letter getNextLetter() {
+		Letter ret;
+		
 		Random random = new Random();
 		int index = random.nextInt(nextTiles.size());
 		
-		Letter ret = nextTiles.get(index);
+		ret = nextTiles.get(index);
 		nextTiles.remove(index);
-		
 		return ret;
 	}
 
@@ -96,9 +97,59 @@ public class Board implements Serializable {
 	public void faceDownAllTiles() {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				board[i][j].setState(eTileState.FACE_DOWN);
+				if (board[i][j].getState() != eTileState.EMPTY) {
+					board[i][j].setState(eTileState.FACE_DOWN);	
+				}
 			}
 		}
 		
+	}
+	
+	public List<Character> getFaceUpLetters() {
+		List<Character> ret = new ArrayList<Character>();
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (board[i][j].getState() == eTileState.FACE_UP) {
+					ret.add(board[i][j].getSign());	
+				}
+			}
+		}
+		
+		return ret;
+	}
+
+	//word must be legal, all letters are assumed to be available!!!!
+	public void removeLetters(String word) {
+		for(int i = 0; i < word.length() ; i++) { 
+		    Character c = word.charAt(i);
+		    
+		    Tile remove = getFaceUpTileWithChar(c);
+
+		    // NOTE: This if is just in case someone uses this function wrong
+		    // remove should never be null
+		    if (remove != null) {
+		    	if (nextTiles.isEmpty()) {
+		    		remove.setState(eTileState.EMPTY);
+		    	} else {
+		    		board[remove.getCoord().x][remove.getCoord().y].setLetter(getNextLetter());
+		    		board[remove.getCoord().x][remove.getCoord().y].setState(eTileState.FACE_DOWN);
+		    	}
+		    }
+		    
+		}
+	}
+	
+	private Tile getFaceUpTileWithChar(Character c) {
+		List<Tile> tiles = getFaceUpTiles();
+		Tile ret = null;
+		
+		for (Tile tile : tiles) {
+			if (tile.getSign() == c.charValue()) {
+				ret = tile;
+			}
+		}
+		
+		return ret;
 	}
 }

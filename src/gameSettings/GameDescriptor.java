@@ -49,7 +49,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "GameDescriptor")
 public class GameDescriptor implements Serializable{
 
-    @XmlElement(name = "GameType", required = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3383955056447447949L;
+	@XmlElement(name = "GameType", required = true)
     protected GameType gameType;
     @XmlElement(name = "Structure", required = true)
     protected Structure structure;

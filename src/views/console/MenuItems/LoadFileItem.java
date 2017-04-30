@@ -1,10 +1,8 @@
 package views.console.MenuItems;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import engine.GameManager;
@@ -18,12 +16,10 @@ public class LoadFileItem extends MenuItem {
 	public LoadFileItem(ConsoleView cm, Scanner scanner) {
 		super(scanner);
 		console = cm;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getString() {
-		// TODO Auto-generated method stub
 		return MENU_STRING;
 	}
 

@@ -54,7 +54,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Structure")
 public class Structure implements Serializable{
 
-    @XmlElement(name = "DictionaryFileName", required = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4439982386912653437L;
+	@XmlElement(name = "DictionaryFileName", required = true)
     protected String dictionaryFileName;
     @XmlElement(name = "Letters", required = true)
     protected Letters letters;

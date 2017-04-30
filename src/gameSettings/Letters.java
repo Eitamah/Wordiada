@@ -46,7 +46,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Letters")
 public class Letters implements Serializable{
 
-    @XmlElement(name = "Letter", required = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1314664815570736529L;
+	@XmlElement(name = "Letter", required = true)
     protected List<Letter> letter;
     @XmlAttribute(name = "target-deck-size", required = true)
     protected short targetDeckSize;

@@ -1,20 +1,9 @@
 package engine;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
-import org.apache.commons.io.FilenameUtils;
-import org.xml.sax.SAXException;
-
-import gameSettings.GameDescriptor;
 
 public class GameManager implements Serializable{
 	/**

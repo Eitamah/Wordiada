@@ -6,7 +6,11 @@ import java.util.Set;
 
 public class Trie implements Serializable{
 
-    private TrieNode root;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7484421465296545140L;
+	private TrieNode root;
     private int size;
 
     public Trie() {

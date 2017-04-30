@@ -1,6 +1,5 @@
 package views.console.MenuItems;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,12 +13,10 @@ public class SaveGameItem extends MenuItem{
 	
 	public SaveGameItem(Scanner scanner) {
 		super(scanner);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getString() {
-		// TODO Auto-generated method stub
 		return MENU_STRING;
 	}
 
@@ -32,8 +29,7 @@ public class SaveGameItem extends MenuItem{
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(gameManager);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Problem saving file");
 		} finally {
 			try {
 				if (oos != null)

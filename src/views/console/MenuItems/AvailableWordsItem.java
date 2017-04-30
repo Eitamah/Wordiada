@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import engine.GameManager;
 import engine.Tile;
-import views.console.ConsoleView;
 import engine.Game.eGameState;
 
 public class AvailableWordsItem extends MenuItem{
@@ -23,7 +22,8 @@ public class AvailableWordsItem extends MenuItem{
 
 	@Override
 	public void Execute(GameManager gameManager) {
-		if (gameManager.getCurrentGame().getStatus() == eGameState.RUNNING) {
+		if ((gameManager.getCurrentGame() != null) &&
+			(gameManager.getCurrentGame().getStatus() == eGameState.RUNNING)) {
 			List<Tile> tiles = gameManager.getCurrentGame().getBoard().getFaceUpTiles();
 			char[] letters = getLettersFromList(tiles);
 			System.out.println("Number of available words -  " +  

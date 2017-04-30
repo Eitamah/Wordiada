@@ -12,6 +12,10 @@ import java.util.HashMap;
 import org.apache.commons.io.input.BOMInputStream;
 
 public class Dictionary implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2883912875622922743L;
 	private int totalWords;
 	private static String INVALID_CHARS = "[!?,.:;\\-_=+\\*\"'\\(\\){}\\[\\]%$]";
 	
@@ -52,12 +56,17 @@ public class Dictionary implements Serializable{
 			
 			// byte order mark (BOM) is a Unicode character used to signal the endianness 
 			// (byte order) of a text file or stream. we don't want to add this as a word.
-			bmr = new BOMInputStream(fs);
+//			bmr = new BOMInputStream(fs);
 		
 			fr = new FileReader(filePath);
 			br = new BufferedReader(fr);
 			
-			br.skip(bmr.getBOM().length());
+			int first = br.read();
+			if ((first > 127) || first == 0) {
+				// means first 4 letters are BOM
+				br.skip(4);	
+			}
+			
 			String currentLine = br.readLine();
 			
 			while (currentLine != null) {

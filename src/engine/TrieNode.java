@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class TrieNode implements Serializable{
-    private HashMap<Character, TrieNode> children;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7308368219447014080L;
+	private HashMap<Character, TrieNode> children;
     private String text;
     private boolean isWord;
 

@@ -52,7 +52,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "DynamicPlayers")
 public class DynamicPlayers implements Serializable{
 
-    @XmlAttribute(name = "total-players", required = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4940932476078325171L;
+	@XmlAttribute(name = "total-players", required = true)
     protected byte totalPlayers;
     @XmlAttribute(name = "game-title", required = true)
     protected List<String> gameTitle;

@@ -47,7 +47,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Letter")
 public class Letter implements Serializable{
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5447292777366658918L;
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
